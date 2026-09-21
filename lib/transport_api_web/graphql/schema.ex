@@ -1,5 +1,6 @@
 defmodule TransportApiWeb.Schema do
   use Absinthe.Schema
+
   import Ecto.Query
 
   alias TransportApi.Repo
@@ -45,7 +46,7 @@ defmodule TransportApiWeb.Schema do
       resolve(fn _, %{stop_id: stop_id}, _ ->
         stop_times =
           TransportApi.StopTime
-          |> Ecto.Query.where([st], st.stop_id == ^stop_id)
+          |> where([st], st.stop_id == ^stop_id)
           |> Repo.all()
 
         {:ok, stop_times}
